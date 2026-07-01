@@ -44,14 +44,16 @@ superpowers plugin installed.
 
 | Mode | Trigger signals | End condition |
 |------|-----------------|---------------|
-| **LOOP** | time-driven, recurring — "每隔…", "持续监控", an interval given, `/loop` | no intrinsic end; needs a written exit condition |
-| **GOAL** | result-driven, run-until-done — "把所有测试修绿", "直到 X 为止" | a completion criterion exists |
+| **LOOP** | time-driven, recurring — "every N…" / "每隔…", "keep monitoring" / "持续监控", an interval given, `/loop` | no intrinsic end; needs a written exit condition |
+| **GOAL** | result-driven, run-until-done — "turn all tests green" / "把所有测试修绿", "until X" / "直到 X 为止" | a completion criterion exists |
 
 ## Trigger
 
 Automatic (via the `description` field) plus explicit invocation.
-Trigger phrases: "持续做", "每隔", "循环跑", "直到…为止", "自主跑",
-"跑个 loop", "loop", "goal", and explicit "用 loop-goal skill".
+Trigger phrases (English or Chinese): "loop", "goal", "keep running",
+"run in a loop", "until X", "run autonomously" — or their Chinese
+equivalents "持续做", "每隔", "循环跑", "直到…为止", "自主跑", "跑个 loop"
+— and an explicit "use the loop-goal skill".
 
 ## Checkpoint file: `.loopgoal/state.json`
 
@@ -61,20 +63,20 @@ commits hold history.
 ```json
 {
   "mode": "goal",
-  "objective": "把 auth 模块迁移到新 API",
-  "exit_condition": "auth/ 全部测试通过且旧中间件已删除",
+  "objective": "Migrate the auth module to the new API",
+  "exit_condition": "all auth/ tests pass and the old middleware is removed",
   "status": "in_progress",
   "iteration": 3,
   "phases": [
-    {"name": "盘点调用点", "status": "done"},
-    {"name": "重构 token 刷新", "status": "in_progress"}
+    {"name": "Inventory call sites", "status": "done"},
+    {"name": "Refactor token refresh", "status": "in_progress"}
   ],
   "current": {
-    "focus": "重构 token 刷新",
-    "next_action": "把 refresh.ts 的 retry 接到新 client",
-    "blockers": "新 client 超时默认值未知"
+    "focus": "Refactor token refresh",
+    "next_action": "Wire refresh.ts retry into the new client",
+    "blockers": "The new client's default timeout is unknown"
   },
-  "decisions": ["放弃改 axios,统一用新 SDK —— 理由:…"],
+  "decisions": ["Dropped patching axios; standardize on the new SDK — reason: …"],
   "verify_cmd": "npm test -- auth/",
   "updated_at": "2026-05-17T15:00:00"
 }
@@ -127,8 +129,13 @@ compaction is most likely to silently drop.
 ```
 loop-goal/
 ├── SKILL.md              # mode detection + R1–R6 + triggers
-├── README.md             # what / why
+├── README.md             # what / why (English; canonical source)
 ├── DESIGN.md             # this document
+├── docs/
+│   └── i18n/             # README translations (10 languages)
+│       ├── README.zh-Hans.md
+│       ├── README.zh-Hant.md
+│       └── …             # ja, es, fr, ar, hi, pt-BR, ru, bn
 └── templates/
     └── state.json        # checkpoint skeleton, copied by R1
 ```

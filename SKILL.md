@@ -1,6 +1,6 @@
 ---
 name: loop-goal
-description: Discipline rules for long-running agent tasks — recurring loops and run-until-done goals. Use when about to run a task that repeats on an interval or runs until a completion criterion is met. Trigger phrases — "持续做", "每隔", "循环跑", "直到…为止", "自主跑", "跑个 loop", "loop", "goal", or explicit "用 loop-goal skill". Enforces three things that otherwise rely on agent self-discipline: (1) checkpointing recoverable state to a single `.loopgoal/state.json` file plus git commits, (2) running each iteration/phase in a fresh subagent so the main session's context never accumulates, (3) an explicit, written exit condition. Auto-detects LOOP mode (time-driven, recurring, no intrinsic end) vs GOAL mode (result-driven, has a completion criterion). Pure discipline — writes no code, runs no commands, does not wrap /loop or /schedule.
+description: Discipline rules for long-running agent tasks — recurring loops and run-until-done goals. Use when about to run a task that repeats on an interval or runs until a completion criterion is met. Trigger phrases (English or Chinese) — "loop", "goal", "keep running", "run in a loop", "until X", "run autonomously", "持续做", "每隔", "循环跑", "直到…为止", "自主跑", "跑个 loop", or an explicit "use the loop-goal skill". Enforces three things that otherwise rely on agent self-discipline: (1) checkpointing recoverable state to a single `.loopgoal/state.json` file plus git commits, (2) running each iteration/phase in a fresh subagent so the main session's context never accumulates, (3) an explicit, written exit condition. Auto-detects LOOP mode (time-driven, recurring, no intrinsic end) vs GOAL mode (result-driven, has a completion criterion). Pure discipline — writes no code, runs no commands, does not wrap /loop or /schedule.
 ---
 
 # loop-goal
@@ -23,8 +23,8 @@ Decide LOOP or GOAL before anything else.
 
 | Mode | Signals | End condition |
 |------|---------|---------------|
-| **LOOP** | time-driven, recurring — "每隔…", "持续监控", an interval given, `/loop` | none intrinsic — you MUST write one |
-| **GOAL** | result-driven, run-until-done — "把所有测试修绿", "直到 X 为止" | a completion criterion already exists |
+| **LOOP** | time-driven, recurring — "every N…" / "每隔…", "keep monitoring" / "持续监控", an interval given, `/loop` | none intrinsic — you MUST write one |
+| **GOAL** | result-driven, run-until-done — "turn all tests green" / "把所有测试修绿", "until X" / "直到 X 为止" | a completion criterion already exists |
 
 State the detected mode out loud, then proceed.
 
