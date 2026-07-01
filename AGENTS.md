@@ -20,3 +20,7 @@ discipline before you start.
 
 Full rules, checkpoint format, and loop/goal specifics:
 **[`skills/loop-goal/SKILL.md`](skills/loop-goal/SKILL.md)**.
+
+*Copying this file into your own repo? Repoint the link above to wherever you
+installed the skill (e.g. `.agents/skills/loop-goal/SKILL.md`), or drop it if you
+rely on the skill's own auto-trigger.*
