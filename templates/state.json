@@ -1,5 +1,5 @@
 {
-  "mode": "goal",
+  "mode": "loop|goal",
   "objective": "",
   "exit_condition": "",
   "status": "in_progress",
