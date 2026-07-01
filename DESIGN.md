@@ -128,17 +128,43 @@ compaction is most likely to silently drop.
 
 ```
 loop-goal/
-├── SKILL.md              # mode detection + R1–R6 + triggers
-├── README.md             # what / why (English; canonical source)
-├── DESIGN.md             # this document
-├── docs/
-│   └── i18n/             # README translations (10 languages)
-│       ├── README.zh-Hans.md
-│       ├── README.zh-Hant.md
-│       └── …             # ja, es, fr, ar, hi, pt-BR, ru, bn
-└── templates/
-    └── state.json        # checkpoint skeleton, copied by R1
+├── skills/
+│   └── loop-goal/
+│       ├── SKILL.md          # mode detection + R1–R6 + triggers
+│       └── templates/
+│           └── state.json    # checkpoint skeleton, copied by R1
+├── .claude-plugin/
+│   ├── plugin.json           # Claude Code plugin manifest
+│   └── marketplace.json      # single-plugin marketplace
+├── AGENTS.md                 # thin always-on pointer (Codex/Copilot)
+├── .github/
+│   └── copilot-instructions.md  # thin always-on pointer (Copilot)
+├── README.md                 # what / why + per-tool install matrix
+├── DESIGN.md                 # this document
+└── docs/
+    └── i18n/                 # README translations (10 languages)
 ```
+
+## Multi-platform distribution
+
+loop-goal is pure prose, so it ships as native, checked-in files — no hosted
+service. The single canonical `skills/loop-goal/SKILL.md` feeds:
+
+- the `skills` CLI for every agent (`npx skills add lgqyhm2010/loop-goal -a <agent>`);
+- the Claude Code **plugin** (auto-discovered under `skills/`), installable via
+  `/plugin marketplace add lgqyhm2010/loop-goal` → `/plugin install loop-goal@lgqyhm2010`.
+
+`AGENTS.md` and `.github/copilot-instructions.md` are thin always-on pointers to
+the skill (Codex and Copilot); they never duplicate the rules.
+
+The skill lives under `skills/loop-goal/` (not the repo root) because the `skills`
+CLI copies only `SKILL.md` for a root-level skill but the whole folder — including
+`templates/` — for a `skills/<name>/` skill.
+
+**Caveats.** The CLI's Codex global path (`~/.codex/skills/`) may differ from where
+Codex loads global skills; project-level install or `AGENTS.md` is recommended.
+Copilot's auto-loading of `.agents/skills/` is unverified, so
+`.github/copilot-instructions.md` is the recommended always-on path there.
 
 ## Non-goals
 
