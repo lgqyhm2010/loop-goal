@@ -8,26 +8,51 @@
 
 ## التثبيت
 
-أضِفها عبر واجهة [`skills`](https://github.com/vercel-labs/skills) —
-دون استنساخ ولا نسخ يدوي:
+loop-goal عبارة عن ملف `SKILL.md` واحد تحت `skills/loop-goal/`. اختر أداتك أدناه —
+يتم تثبيتها في Claude Code وCodex وGitHub Copilot.
+
+### تثبيت سريع (الثلاثة معاً)
+
+تُثبِّت واجهة سطر الأوامر [`skills`](https://github.com/vercel-labs/skills) المهارة —
+دون استنساخ ودون نسخ يدوي:
 
 ```bash
-# داخل المشروع الحالي → ‎.claude/skills/‎
-npx skills add lgqyhm2010/loop-goal
-
-# لكل المشاريع → ‎~/.claude/skills/‎
-npx skills add lgqyhm2010/loop-goal -g
+npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 ```
 
-تعثر `skills` على `SKILL.md` في جذر المستودع وتضعه (مع
-`templates/`) في مجلد المهارات لديك. أضِف `-a claude-code -y` للتثبيت
-دون تفاعل.
+احذف أي هدف `-a …` لا تحتاجه. أضِف `-g` للتثبيت في كل مشروع
+بدلاً من المشروع الحالي فقط.
 
-تفضّل القيام بذلك يدوياً؟ انسخ `SKILL.md` و`templates/` إلى
-`.claude/skills/loop-goal/`.
+### Claude Code
+
+- **كمهارة:** `npx skills add lgqyhm2010/loop-goal -a claude-code` (`-g` للتثبيت الشامل)
+- **كإضافة (plugin):** داخل Claude Code، نفّذ `/plugin marketplace add lgqyhm2010/loop-goal`
+  ثم `/plugin install loop-goal@lgqyhm2010`
+- **يدوياً:** انسخ `skills/loop-goal/` إلى `.claude/skills/`
+
+### OpenAI Codex
+
+- **كمهارة:** `npx skills add lgqyhm2010/loop-goal -a codex` — يُثبَّت في
+  `.agents/skills/loop-goal/`. يُنصح بالتثبيت على مستوى المشروع.
+- **دائمة التفعيل:** انسخ المؤشر (pointer) من [`AGENTS.md`](AGENTS.md) إلى
+  ملف `AGENTS.md` الخاص بمستودعك (أو `~/.codex/AGENTS.md`) حتى يُحمَّل الانضباط دائماً.
+
+### GitHub Copilot
+
+- **كمهارة:** `npx skills add lgqyhm2010/loop-goal -a github-copilot` — يُثبَّت
+  في `.agents/skills/loop-goal/`.
+- **دائمة التفعيل (موصى بها):** انسخ المؤشر من
+  [`.github/copilot-instructions.md`](.github/copilot-instructions.md) إلى ملف
+  `.github/copilot-instructions.md` الخاص بمستودعك.
+
+> **ملاحظات.** بالنسبة لـ Codex، يُفضَّل التثبيت على مستوى المشروع أو مسار
+> `AGENTS.md` — فمسار الأداة الشامل (`-g`) (`~/.codex/skills/`) قد لا يطابق
+> المكان الذي يقرأ منه Codex المهارات الشاملة. أما بالنسبة لـ Copilot، فمسار
+> `.github/copilot-instructions.md` هو الطريقة الأكثر موثوقية لإبقاء الانضباط
+> دائم التفعيل.
 
 بمجرد التثبيت، اكتفِ بوصف مهمة حلقية أو تعمل حتى الإنجاز — تُفعَّل
-المهارة من تلقاء نفسها (انظر «متى تُفعَّل»).
+المهارة من تلقاء نفسها (انظر [متى تُفعَّل](#متى-تُفعَّل)).
 
 ## المشكلة
 
@@ -73,8 +98,11 @@ npx skills add lgqyhm2010/loop-goal -g
 
 ## الملفات
 
-- `SKILL.md` — المهارة نفسها: اكتشاف الوضع، وصيغة نقطة المرجعية،
-  والقواعد الست.
-- `DESIGN.md` — الأساس المنطقي للتصميم والقرارات.
-- `templates/state.json` — هيكل نقطة المرجعية، يُنسخ إلى
+- `skills/loop-goal/SKILL.md` — المهارة نفسها: اكتشاف الوضع، وصيغة نقطة
+  المرجعية، والقواعد الست.
+- `skills/loop-goal/templates/state.json` — هيكل نقطة المرجعية، يُنسخ إلى
   المشروع بموجب القاعدة R1.
+- `.claude-plugin/` — بيانات وصفية (manifests) لإضافة Claude Code والسوق (marketplace).
+- `AGENTS.md`، `.github/copilot-instructions.md` — مؤشرات (pointers) رفيعة
+  دائمة التفعيل لـ Codex وCopilot.
+- `DESIGN.md` — الأساس المنطقي للتصميم والقرارات.

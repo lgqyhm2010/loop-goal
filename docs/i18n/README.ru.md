@@ -8,23 +8,49 @@
 
 ## Установка
 
-Добавьте его с помощью CLI [`skills`](https://github.com/vercel-labs/skills) —
+loop-goal — это единый `SKILL.md` в `skills/loop-goal/`. Выберите свой инструмент
+ниже — он устанавливается в Claude Code, Codex и GitHub Copilot.
+
+### Быстрая установка (все три сразу)
+
+CLI [`skills`](https://github.com/vercel-labs/skills) устанавливает скилл —
 без клонирования, без ручного копирования:
 
 ```bash
-# В текущий проект → .claude/skills/
-npx skills add lgqyhm2010/loop-goal
-
-# Для каждого проекта → ~/.claude/skills/
-npx skills add lgqyhm2010/loop-goal -g
+npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 ```
 
-`skills` находит `SKILL.md` в корне репозитория и помещает его (вместе с
-`templates/`) в вашу директорию скиллов. Добавьте `-a claude-code -y`,
-чтобы установить в неинтерактивном режиме.
+Уберите любую ненужную цель `-a …`. Добавьте `-g`, чтобы установить скилл для
+каждого проекта, а не только для текущего.
 
-Предпочитаете сделать это вручную? Скопируйте `SKILL.md` и `templates/`
-в `.claude/skills/loop-goal/`.
+### Claude Code
+
+- **Как скилл:** `npx skills add lgqyhm2010/loop-goal -a claude-code` (`-g` для глобальной установки)
+- **Как плагин:** в Claude Code выполните `/plugin marketplace add lgqyhm2010/loop-goal`,
+  затем `/plugin install loop-goal@lgqyhm2010`
+- **Вручную:** скопируйте `skills/loop-goal/` в `.claude/skills/`
+
+### OpenAI Codex
+
+- **Как скилл:** `npx skills add lgqyhm2010/loop-goal -a codex` — устанавливается в
+  `.agents/skills/loop-goal/`. Рекомендуется установка на уровне проекта.
+- **Всегда активно:** скопируйте указатель из [`AGENTS.md`](AGENTS.md) в `AGENTS.md`
+  вашего собственного репозитория (или в `~/.codex/AGENTS.md`), чтобы дисциплина
+  загружалась всегда.
+
+### GitHub Copilot
+
+- **Как скилл:** `npx skills add lgqyhm2010/loop-goal -a github-copilot` — устанавливается
+  в `.agents/skills/loop-goal/`.
+- **Всегда активно (рекомендуется):** скопируйте указатель из
+  [`.github/copilot-instructions.md`](.github/copilot-instructions.md) в
+  `.github/copilot-instructions.md` вашего собственного репозитория.
+
+> **Примечания.** Для Codex предпочитайте установку на уровне проекта или путь через
+> `AGENTS.md` — глобальный путь CLI (`-g`) (`~/.codex/skills/`) может не совпадать с
+> тем местом, откуда Codex читает глобальные скиллы. Для Copilot путь через
+> `.github/copilot-instructions.md` — самый надёжный способ поддерживать дисциплину
+> всегда активной.
 
 После установки просто опишите циклическую задачу или задачу «выполнять
 до завершения» — скилл срабатывает сам (см. [Когда он срабатывает](#когда-он-срабатывает)).
@@ -78,8 +104,11 @@ superpowers — необязательный компаньон, но никог
 
 ## Файлы
 
-- `SKILL.md` — сам скилл: определение режима, формат контрольной точки,
-  шесть правил.
+- `skills/loop-goal/SKILL.md` — сам скилл: определение режима, формат
+  контрольной точки, шесть правил.
+- `skills/loop-goal/templates/state.json` — скелет контрольной точки,
+  копируемый в проект правилом R1.
+- `.claude-plugin/` — манифесты плагина и marketplace для Claude Code.
+- `AGENTS.md`, `.github/copilot-instructions.md` — минимальные всегда активные
+  указатели для Codex и Copilot.
 - `DESIGN.md` — обоснование дизайна и принятые решения.
-- `templates/state.json` — скелет контрольной точки, копируемый в проект
-  правилом R1.

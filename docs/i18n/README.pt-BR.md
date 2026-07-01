@@ -8,23 +8,49 @@ rodam até uma meta ser atingida (**goals**).
 
 ## Instalação
 
-Adicione com a CLI [`skills`](https://github.com/vercel-labs/skills) —
+loop-goal é um único `SKILL.md` em `skills/loop-goal/`. Escolha sua
+ferramenta abaixo — ela instala no Claude Code, no Codex e no GitHub Copilot.
+
+### Instalação rápida (as três de uma vez)
+
+A CLI [`skills`](https://github.com/vercel-labs/skills) instala a skill —
 sem clone, sem cópia manual:
 
 ```bash
-# No projeto atual → .claude/skills/
-npx skills add lgqyhm2010/loop-goal
-
-# Para todos os projetos → ~/.claude/skills/
-npx skills add lgqyhm2010/loop-goal -g
+npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 ```
 
-O `skills` encontra o `SKILL.md` na raiz do repositório e o coloca (junto
-com `templates/`) no seu diretório de skills. Adicione `-a claude-code -y`
-para instalar de forma não interativa.
+Remova qualquer alvo `-a …` que você não precise. Adicione `-g` para
+instalar em todos os projetos em vez de apenas no atual.
 
-Prefere fazer à mão? Copie `SKILL.md` e `templates/` para
-`.claude/skills/loop-goal/`.
+### Claude Code
+
+- **Como skill:** `npx skills add lgqyhm2010/loop-goal -a claude-code` (`-g` para global)
+- **Como plugin:** no Claude Code, rode `/plugin marketplace add lgqyhm2010/loop-goal`
+  e depois `/plugin install loop-goal@lgqyhm2010`
+- **Manualmente:** copie `skills/loop-goal/` para `.claude/skills/`
+
+### OpenAI Codex
+
+- **Como skill:** `npx skills add lgqyhm2010/loop-goal -a codex` — instala em
+  `.agents/skills/loop-goal/`. A instalação em nível de projeto é recomendada.
+- **Sempre ativo:** copie o ponteiro de [`AGENTS.md`](AGENTS.md) para o
+  `AGENTS.md` do seu próprio repositório (ou `~/.codex/AGENTS.md`) para que a
+  disciplina esteja sempre carregada.
+
+### GitHub Copilot
+
+- **Como skill:** `npx skills add lgqyhm2010/loop-goal -a github-copilot` — instala
+  em `.agents/skills/loop-goal/`.
+- **Sempre ativo (recomendado):** copie o ponteiro de
+  [`.github/copilot-instructions.md`](.github/copilot-instructions.md) para o
+  `.github/copilot-instructions.md` do seu próprio repositório.
+
+> **Notas.** Para o Codex, prefira uma instalação em nível de projeto ou o
+> caminho via `AGENTS.md` — o caminho global (`-g`) da CLI (`~/.codex/skills/`)
+> pode não corresponder ao local de onde o Codex lê as skills globais. Para o
+> Copilot, o caminho `.github/copilot-instructions.md` é a forma mais
+> confiável de manter a disciplina sempre ativa.
 
 Uma vez instalada, basta descrever uma tarefa em loop ou de rodar-até-concluir
 — a skill é acionada por conta própria (veja [Quando ela é acionada](#quando-ela-é-acionada)).
@@ -76,8 +102,11 @@ plugin superpowers é um complemento opcional, nunca um requisito.
 
 ## Arquivos
 
-- `SKILL.md` — a própria skill: detecção de modo, o formato do
-  checkpoint, as seis regras.
+- `skills/loop-goal/SKILL.md` — a própria skill: detecção de modo, o formato
+  do checkpoint, as seis regras.
+- `skills/loop-goal/templates/state.json` — o esqueleto do checkpoint,
+  copiado para um projeto pela regra R1.
+- `.claude-plugin/` — manifestos do plugin do Claude Code + do marketplace.
+- `AGENTS.md`, `.github/copilot-instructions.md` — ponteiros enxutos e
+  sempre ativos para o Codex e o Copilot.
 - `DESIGN.md` — a justificativa e as decisões de design.
-- `templates/state.json` — o esqueleto do checkpoint, copiado para um
-  projeto pela regra R1.
