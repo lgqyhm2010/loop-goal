@@ -4,6 +4,29 @@
 
 一个用于可靠运行**长任务**的纪律型技能——这类任务要么按计划重复执行（**循环，loops**），要么持续运行直到达成目标（**目标，goals**）。
 
+## 安装
+
+使用 [`skills`](https://github.com/vercel-labs/skills) CLI 添加——
+无需克隆，也无需手动复制：
+
+```bash
+# 安装到当前项目 → .claude/skills/
+npx skills add lgqyhm2010/loop-goal
+
+# 安装到所有项目 → ~/.claude/skills/
+npx skills add lgqyhm2010/loop-goal -g
+```
+
+`skills` 会找到仓库根目录下的 `SKILL.md`，并将它（连同
+`templates/`）放入你的技能目录。加上 `-a claude-code -y` 即可
+以非交互方式安装。
+
+想手动操作？把 `SKILL.md` 和 `templates/` 复制到
+`.claude/skills/loop-goal/`。
+
+安装完成后，只需描述一个循环或跑到完成为止的任务——该技能
+会自行触发（参见 [何时触发](#何时触发)）。
+
 ## 问题所在
 
 长时间运行的智能体任务通常会以三种不易察觉的方式失败：

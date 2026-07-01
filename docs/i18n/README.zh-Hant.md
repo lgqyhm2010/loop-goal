@@ -4,6 +4,24 @@
 
 一個用於可靠執行**長時間任務**的紀律技能——這類任務要麼依排程重複執行（**loops**，循環），要麼持續執行直到目標達成（**goals**，目標）。
 
+## 安裝
+
+使用 [`skills`](https://github.com/vercel-labs/skills) CLI 加入——無需 clone、無需手動複製：
+
+```bash
+# 加入目前專案 → .claude/skills/
+npx skills add lgqyhm2010/loop-goal
+
+# 供所有專案使用 → ~/.claude/skills/
+npx skills add lgqyhm2010/loop-goal -g
+```
+
+`skills` 會找到 repo 根目錄的 `SKILL.md`，並把它（連同 `templates/`）放進你的 skills 目錄。加上 `-a claude-code -y` 即可非互動式安裝。
+
+想手動安裝？把 `SKILL.md` 與 `templates/` 複製到 `.claude/skills/loop-goal/`。
+
+安裝完成後，只要描述一個循環或執行到完成為止的任務——技能就會自動觸發（見[何時觸發](#何時觸發)）。
+
 ## 問題所在
 
 長時間執行的 agent 任務會以三種難以察覺的方式失敗：
