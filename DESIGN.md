@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-17
 **Status:** Approved design, pre-implementation
-**Location:** `ai-config/skills/loop-goal/`
+**Location:** `loop-goal/` (standalone skill repo; extracted from `ai-config/skills/loop-goal/`)
 
 ---
 
@@ -125,7 +125,7 @@ compaction is most likely to silently drop.
 ## Skill file structure
 
 ```
-ai-config/skills/loop-goal/
+loop-goal/
 ├── SKILL.md              # mode detection + R1–R6 + triggers
 ├── README.md             # what / why
 ├── DESIGN.md             # this document
