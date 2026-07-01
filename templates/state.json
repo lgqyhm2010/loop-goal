@@ -1,0 +1,18 @@
+{
+  "mode": "goal",
+  "objective": "",
+  "exit_condition": "",
+  "status": "in_progress",
+  "iteration": 0,
+  "phases": [
+    {"name": "", "status": "todo"}
+  ],
+  "current": {
+    "focus": "",
+    "next_action": "",
+    "blockers": ""
+  },
+  "decisions": [],
+  "verify_cmd": "",
+  "updated_at": ""
+}
