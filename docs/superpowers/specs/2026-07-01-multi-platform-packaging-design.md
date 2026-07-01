@@ -47,6 +47,7 @@ folder — which also happens to be the standard Claude Code plugin skills layou
 - Claude Code **plugin** packaging: `.claude-plugin/plugin.json` + `.claude-plugin/marketplace.json`.
 - Always-on pointer files: root `AGENTS.md` (Codex + Copilot + other AGENTS.md-aware tools) and `.github/copilot-instructions.md` (Copilot's documented path).
 - Docs: rewrite `README.md` install section as a per-tool matrix; update all 11 i18n READMEs; update `DESIGN.md`.
+- Add an MIT `LICENSE` file at the repo root (matches `plugin.json`'s `license: MIT` field; the repo currently has no license file).
 
 **Out of scope** (explicitly declined)
 - Codex Plugin Directory publishing.
@@ -210,7 +211,7 @@ Full rules: `skills/loop-goal/SKILL.md`.
 
 1. `git mv` `SKILL.md` → `skills/loop-goal/SKILL.md` and `templates/` →
    `skills/loop-goal/templates/` (preserve history; fixes templates delivery).
-2. Add `.claude-plugin/plugin.json` + `.claude-plugin/marketplace.json`.
+2. Add `.claude-plugin/plugin.json` + `.claude-plugin/marketplace.json` + `LICENSE` (MIT).
 3. Add `AGENTS.md` + `.github/copilot-instructions.md`.
 4. Rewrite `README.md` install matrix + update `DESIGN.md`.
 5. Update all 11 i18n README install sections.
