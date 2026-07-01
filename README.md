@@ -1,3 +1,5 @@
+**English** · [简体中文](docs/i18n/README.zh-Hans.md) · [繁體中文](docs/i18n/README.zh-Hant.md) · [日本語](docs/i18n/README.ja.md) · [Español](docs/i18n/README.es.md) · [Français](docs/i18n/README.fr.md) · [العربية](docs/i18n/README.ar.md) · [हिन्दी](docs/i18n/README.hi.md) · [Português (BR)](docs/i18n/README.pt-BR.md) · [Русский](docs/i18n/README.ru.md) · [বাংলা](docs/i18n/README.bn.md)
+
 # loop-goal
 
 A discipline skill for running **long tasks** reliably — tasks that
@@ -36,8 +38,9 @@ does not wrap `/loop` or `/schedule` — it constrains *how* you run them.
 
 ## When it triggers
 
-Phrases like "持续做", "每隔", "循环跑", "直到…为止", "自主跑",
-"跑个 loop", "loop", "goal", or an explicit "用 loop-goal skill".
+Phrases like "loop", "goal", "keep running", "run in a loop", "until X",
+"run autonomously" — or their Chinese equivalents "持续做", "每隔", "循环跑",
+"直到…为止", "自主跑", "跑个 loop" — or an explicit "use the loop-goal skill".
 
 ## Self-contained
 
