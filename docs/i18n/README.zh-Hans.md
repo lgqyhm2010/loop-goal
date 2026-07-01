@@ -6,23 +6,47 @@
 
 ## 安装
 
-使用 [`skills`](https://github.com/vercel-labs/skills) CLI 添加——
+loop-goal 是位于 `skills/loop-goal/` 下的一个单一 `SKILL.md`。请在下方
+选择你使用的工具——它可以安装到 Claude Code、Codex 和 GitHub Copilot 中。
+
+### 快速安装（三者一次搞定）
+
+[`skills`](https://github.com/vercel-labs/skills) CLI 会安装该技能——
 无需克隆，也无需手动复制：
 
 ```bash
-# 安装到当前项目 → .claude/skills/
-npx skills add lgqyhm2010/loop-goal
-
-# 安装到所有项目 → ~/.claude/skills/
-npx skills add lgqyhm2010/loop-goal -g
+npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 ```
 
-`skills` 会找到仓库根目录下的 `SKILL.md`，并将它（连同
-`templates/`）放入你的技能目录。加上 `-a claude-code -y` 即可
-以非交互方式安装。
+如果不需要某个目标，去掉对应的 `-a …` 即可。加上 `-g` 可以安装到
+每一个项目，而不仅仅是当前项目。
 
-想手动操作？把 `SKILL.md` 和 `templates/` 复制到
-`.claude/skills/loop-goal/`。
+### Claude Code
+
+- **作为技能：** `npx skills add lgqyhm2010/loop-goal -a claude-code`（全局安装用 `-g`）
+- **作为插件：** 在 Claude Code 中运行 `/plugin marketplace add lgqyhm2010/loop-goal`，
+  然后运行 `/plugin install loop-goal@lgqyhm2010`
+- **手动安装：** 把 `skills/loop-goal/` 复制到 `.claude/skills/`
+
+### OpenAI Codex
+
+- **作为技能：** `npx skills add lgqyhm2010/loop-goal -a codex`——会安装到
+  `.agents/skills/loop-goal/`。推荐使用项目级安装。
+- **始终启用：** 把 [`AGENTS.md`](AGENTS.md) 中的指针复制到你自己
+  仓库的 `AGENTS.md`（或 `~/.codex/AGENTS.md`）中，这样该纪律会始终被加载。
+
+### GitHub Copilot
+
+- **作为技能：** `npx skills add lgqyhm2010/loop-goal -a github-copilot`——会安装
+  到 `.agents/skills/loop-goal/`。
+- **始终启用（推荐）：** 把
+  [`.github/copilot-instructions.md`](.github/copilot-instructions.md) 中的指针复制到你自己
+  仓库的 `.github/copilot-instructions.md` 中。
+
+> **说明。** 对于 Codex，优先选择项目级安装或 `AGENTS.md` 方式——
+> CLI 的全局（`-g`）路径（`~/.codex/skills/`）可能与 Codex 实际读取
+> 全局技能的位置不一致。对于 Copilot，`.github/copilot-instructions.md` 方式是保持
+> 该纪律始终启用的最可靠方法。
 
 安装完成后，只需描述一个循环或跑到完成为止的任务——该技能
 会自行触发（参见 [何时触发](#何时触发)）。
@@ -57,6 +81,10 @@ npx skills add lgqyhm2010/loop-goal -g
 
 ## 文件
 
-- `SKILL.md`——技能本身：模式检测、检查点格式、六条规则。
+- `skills/loop-goal/SKILL.md`——技能本身：模式检测、检查点格式、六条规则。
+- `skills/loop-goal/templates/state.json`——检查点骨架，由规则 R1 复制
+  到项目中。
+- `.claude-plugin/`——Claude Code 插件与市场（marketplace）清单文件。
+- `AGENTS.md`、`.github/copilot-instructions.md`——供 Codex 和 Copilot
+  使用的精简的始终启用指针文件。
 - `DESIGN.md`——设计理念与决策。
-- `templates/state.json`——检查点骨架，由规则 R1 复制到项目中。

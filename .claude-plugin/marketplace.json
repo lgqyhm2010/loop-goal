@@ -1,0 +1,7 @@
+{
+  "name": "lgqyhm2010",
+  "owner": { "name": "lgqyhm2010" },
+  "plugins": [
+    { "name": "loop-goal", "source": "./" }
+  ]
+}

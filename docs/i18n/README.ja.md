@@ -6,19 +6,46 @@
 
 ## インストール
 
-[`skills`](https://github.com/vercel-labs/skills) CLI で追加できます。クローンも手動コピーも不要です。
+loop-goal は `skills/loop-goal/` 配下にある単一の `SKILL.md` です。下記からお使いのツールを選んでください。
+Claude Code、Codex、GitHub Copilot のいずれにもインストールできます。
+
+### クイックインストール（3つ同時に）
+
+[`skills`](https://github.com/vercel-labs/skills) CLI でスキルをインストールできます。
+クローンも手動コピーも不要です。
 
 ```bash
-# 現在のプロジェクトへ → .claude/skills/
-npx skills add lgqyhm2010/loop-goal
-
-# すべてのプロジェクトへ → ~/.claude/skills/
-npx skills add lgqyhm2010/loop-goal -g
+npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 ```
 
-`skills` はリポジトリのルートにある `SKILL.md` を見つけ、それを（`templates/` とともに）あなたのスキルディレクトリへ配置します。非対話的にインストールするには `-a claude-code -y` を付けてください。
+不要な `-a …` ターゲットは削除してください。現在のプロジェクトだけでなく、すべての
+プロジェクトへインストールするには `-g` を付けます。
 
-手作業で行いたい場合は、`SKILL.md` と `templates/` を `.claude/skills/loop-goal/` へコピーしてください。
+### Claude Code
+
+- **スキルとして:** `npx skills add lgqyhm2010/loop-goal -a claude-code`（グローバルには `-g`）
+- **プラグインとして:** Claude Code 内で `/plugin marketplace add lgqyhm2010/loop-goal`
+  を実行し、続けて `/plugin install loop-goal@lgqyhm2010` を実行します
+- **手動で:** `skills/loop-goal/` を `.claude/skills/` へコピーしてください
+
+### OpenAI Codex
+
+- **スキルとして:** `npx skills add lgqyhm2010/loop-goal -a codex` — `.agents/skills/loop-goal/`
+  にインストールされます。プロジェクト単位でのインストールを推奨します。
+- **常時有効化:** [`AGENTS.md`](AGENTS.md) にあるポインターを、あなた自身のリポジトリの
+  `AGENTS.md`（または `~/.codex/AGENTS.md`）にコピーすると、この規律が常に読み込まれます。
+
+### GitHub Copilot
+
+- **スキルとして:** `npx skills add lgqyhm2010/loop-goal -a github-copilot` —
+  `.agents/skills/loop-goal/` にインストールされます。
+- **常時有効化（推奨）:** [`.github/copilot-instructions.md`](.github/copilot-instructions.md)
+  にあるポインターを、あなた自身のリポジトリの `.github/copilot-instructions.md` にコピーしてください。
+
+> **注意事項。** Codex では、プロジェクト単位のインストールか `AGENTS.md` 経由の方法を推奨します。
+> CLI のグローバル（`-g`）パス（`~/.codex/skills/`）は、Codex がグローバルスキルを読み込む
+> 場所と一致しない場合があります。Copilot では、`.github/copilot-instructions.md` 経由の方法が、
+> この規律を常時有効に保つ最も確実な手段です。
 
 インストールが済んだら、あとはループするタスクや完了まで実行するタスクを説明するだけです。スキルは自動的に発動します（[いつ発動するか](#いつ発動するか) を参照）。
 
@@ -52,6 +79,10 @@ npx skills add lgqyhm2010/loop-goal -g
 
 ## ファイル
 
-- `SKILL.md` — スキル本体。モード検出、チェックポイント形式、6つのルール。
+- `skills/loop-goal/SKILL.md` — スキル本体。モード検出、チェックポイント形式、6つのルール。
+- `skills/loop-goal/templates/state.json` — チェックポイントのひな形。ルール R1 によって
+  プロジェクトへコピーされます。
+- `.claude-plugin/` — Claude Code のプラグイン + マーケットプレイスのマニフェスト。
+- `AGENTS.md`、`.github/copilot-instructions.md` — Codex と Copilot 向けの、常時有効化を
+  行う簡潔なポインターファイル。
 - `DESIGN.md` — 設計の根拠と決定事項。
-- `templates/state.json` — チェックポイントのひな形。ルール R1 によってプロジェクトへコピーされます。

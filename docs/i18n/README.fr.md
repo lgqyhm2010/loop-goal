@@ -8,23 +8,48 @@ soit se répètent selon une planification (**boucles**), soit s'exécutent jusq
 
 ## Installation
 
-Ajoutez-la avec la CLI [`skills`](https://github.com/vercel-labs/skills) —
+loop-goal est un unique `SKILL.md` sous `skills/loop-goal/`. Choisissez votre outil
+ci-dessous — l'installation se fait dans Claude Code, Codex et GitHub Copilot.
+
+### Installation rapide (les trois à la fois)
+
+La CLI [`skills`](https://github.com/vercel-labs/skills) installe la compétence —
 sans clonage, sans copie manuelle :
 
 ```bash
-# Dans le projet courant → .claude/skills/
-npx skills add lgqyhm2010/loop-goal
-
-# Pour chaque projet → ~/.claude/skills/
-npx skills add lgqyhm2010/loop-goal -g
+npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 ```
 
-`skills` trouve le `SKILL.md` à la racine du dépôt et le dépose (avec
-`templates/`) dans votre répertoire de compétences. Ajoutez `-a claude-code -y`
-pour une installation non interactive.
+Retirez toute cible `-a …` dont vous n'avez pas besoin. Ajoutez `-g` pour l'installer
+pour chaque projet plutôt que pour le projet courant uniquement.
 
-Vous préférez le faire à la main ? Copiez `SKILL.md` et `templates/` dans
-`.claude/skills/loop-goal/`.
+### Claude Code
+
+- **En tant que compétence :** `npx skills add lgqyhm2010/loop-goal -a claude-code` (`-g` pour une installation globale)
+- **En tant que plugin :** dans Claude Code, exécutez `/plugin marketplace add lgqyhm2010/loop-goal`
+  puis `/plugin install loop-goal@lgqyhm2010`
+- **Manuellement :** copiez `skills/loop-goal/` dans `.claude/skills/`
+
+### OpenAI Codex
+
+- **En tant que compétence :** `npx skills add lgqyhm2010/loop-goal -a codex` — s'installe dans
+  `.agents/skills/loop-goal/`. L'installation au niveau du projet est recommandée.
+- **Toujours actif :** copiez le pointeur depuis [`AGENTS.md`](AGENTS.md) dans le fichier
+  `AGENTS.md` de votre propre dépôt (ou `~/.codex/AGENTS.md`) afin que la discipline soit
+  toujours chargée.
+
+### GitHub Copilot
+
+- **En tant que compétence :** `npx skills add lgqyhm2010/loop-goal -a github-copilot` — s'installe
+  dans `.agents/skills/loop-goal/`.
+- **Toujours actif (recommandé) :** copiez le pointeur depuis
+  [`.github/copilot-instructions.md`](.github/copilot-instructions.md) dans le fichier
+  `.github/copilot-instructions.md` de votre propre dépôt.
+
+> **Remarques.** Pour Codex, préférez une installation au niveau du projet ou la voie `AGENTS.md` —
+> le chemin global (`-g`) de la CLI (`~/.codex/skills/`) peut ne pas correspondre à l'endroit où Codex
+> lit les compétences globales. Pour Copilot, la voie `.github/copilot-instructions.md` est le moyen
+> le plus fiable de garder la discipline toujours active.
 
 Une fois installée, décrivez simplement une tâche en boucle ou à exécuter
 jusqu'à l'achèvement — la compétence se déclenche d'elle-même (voir
@@ -74,8 +99,11 @@ est un compagnon optionnel, jamais une exigence.
 
 ## Fichiers
 
-- `SKILL.md` — la compétence elle-même : détection du mode, le format du point de contrôle,
-  les six règles.
+- `skills/loop-goal/SKILL.md` — la compétence elle-même : détection du mode, le format du
+  point de contrôle, les six règles.
+- `skills/loop-goal/templates/state.json` — le squelette du point de contrôle, copié dans
+  un projet par la règle R1.
+- `.claude-plugin/` — manifestes du plugin Claude Code et du marketplace.
+- `AGENTS.md`, `.github/copilot-instructions.md` — pointeurs légers toujours actifs pour
+  Codex et Copilot.
 - `DESIGN.md` — justification et décisions de conception.
-- `templates/state.json` — le squelette du point de contrôle, copié dans un
-  projet par la règle R1.

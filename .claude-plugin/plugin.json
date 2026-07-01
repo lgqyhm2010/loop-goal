@@ -1,0 +1,8 @@
+{
+  "name": "loop-goal",
+  "description": "Discipline rules for long-running agent tasks — recurring loops and run-until-done goals. Checkpoint to .loopgoal/state.json, isolate each iteration in a fresh subagent, and write an explicit exit condition.",
+  "version": "1.0.0",
+  "author": { "name": "lgqyhm2010" },
+  "homepage": "https://github.com/lgqyhm2010/loop-goal",
+  "license": "MIT"
+}

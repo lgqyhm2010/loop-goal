@@ -8,23 +8,47 @@
 
 ## इंस्टॉल करें
 
-इसे [`skills`](https://github.com/vercel-labs/skills) CLI से जोड़ें —
+loop-goal एक ही `SKILL.md` है, जो `skills/loop-goal/` के अंदर रखी गई है। नीचे अपना टूल चुनें —
+यह Claude Code, Codex, और GitHub Copilot में इंस्टॉल हो जाती है।
+
+### त्वरित इंस्टॉल (तीनों एक साथ)
+
+[`skills`](https://github.com/vercel-labs/skills) CLI स्किल को इंस्टॉल करता है —
 न क्लोन, न मैन्युअल कॉपी:
 
 ```bash
-# मौजूदा प्रोजेक्ट में → .claude/skills/
-npx skills add lgqyhm2010/loop-goal
-
-# हर प्रोजेक्ट के लिए → ~/.claude/skills/
-npx skills add lgqyhm2010/loop-goal -g
+npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 ```
 
-`skills` रिपॉज़िटरी की जड़ में `SKILL.md` ढूँढता है और उसे (साथ ही
-`templates/`) आपकी skills डायरेक्टरी में रख देता है। बिना इंटरैक्शन के
-इंस्टॉल करने के लिए `-a claude-code -y` जोड़ें।
+जिस `-a …` टारगेट की ज़रूरत न हो उसे हटा दें। सिर्फ़ मौजूदा प्रोजेक्ट के बजाय
+हर प्रोजेक्ट में इंस्टॉल करने के लिए `-g` जोड़ें।
 
-खुद हाथ से करना पसंद है? `SKILL.md` और `templates/` को
-`.claude/skills/loop-goal/` में कॉपी करें।
+### Claude Code
+
+- **स्किल के रूप में:** `npx skills add lgqyhm2010/loop-goal -a claude-code` (ग्लोबल के लिए `-g`)
+- **प्लगइन के रूप में:** Claude Code में `/plugin marketplace add lgqyhm2010/loop-goal`
+  चलाएँ, फिर `/plugin install loop-goal@lgqyhm2010`
+- **मैन्युअल रूप से:** `skills/loop-goal/` को `.claude/skills/` में कॉपी करें
+
+### OpenAI Codex
+
+- **स्किल के रूप में:** `npx skills add lgqyhm2010/loop-goal -a codex` — यह
+  `.agents/skills/loop-goal/` में इंस्टॉल होता है। प्रोजेक्ट-स्तर पर इंस्टॉल करने की सलाह दी जाती है।
+- **हमेशा-सक्रिय:** [`AGENTS.md`](AGENTS.md) से पॉइंटर को अपनी खुद की
+  रिपॉज़िटरी की `AGENTS.md` (या `~/.codex/AGENTS.md`) में कॉपी करें ताकि अनुशासन हमेशा लोड रहे।
+
+### GitHub Copilot
+
+- **स्किल के रूप में:** `npx skills add lgqyhm2010/loop-goal -a github-copilot` — यह
+  `.agents/skills/loop-goal/` में इंस्टॉल होता है।
+- **हमेशा-सक्रिय (अनुशंसित):**
+  [`.github/copilot-instructions.md`](.github/copilot-instructions.md) से पॉइंटर को अपनी खुद की
+  रिपॉज़िटरी की `.github/copilot-instructions.md` में कॉपी करें।
+
+> **नोट्स।** Codex के लिए, प्रोजेक्ट-स्तर इंस्टॉल या `AGENTS.md` रूट को प्राथमिकता दें —
+> CLI का ग्लोबल (`-g`) पथ (`~/.codex/skills/`) हो सकता है उस जगह से मेल न खाए जहाँ Codex
+> ग्लोबल स्किल्स पढ़ता है। Copilot के लिए, `.github/copilot-instructions.md` रूट अनुशासन को
+> हमेशा-सक्रिय बनाए रखने का सबसे भरोसेमंद तरीका है।
 
 इंस्टॉल होने के बाद, बस किसी लूपिंग या पूरा-होने-तक चलने वाले कार्य का वर्णन करें —
 स्किल स्वयं सक्रिय हो जाती है (देखें "यह कब सक्रिय होती है")।
@@ -73,8 +97,11 @@ npx skills add lgqyhm2010/loop-goal -g
 
 ## फ़ाइलें
 
-- `SKILL.md` — स्किल स्वयं: मोड पहचान, checkpoint प्रारूप,
+- `skills/loop-goal/SKILL.md` — स्किल स्वयं: मोड पहचान, checkpoint प्रारूप,
   छह नियम।
-- `DESIGN.md` — डिज़ाइन का तर्क और निर्णय।
-- `templates/state.json` — checkpoint का ढांचा, जिसे नियम R1 द्वारा किसी
+- `skills/loop-goal/templates/state.json` — checkpoint का ढांचा, जिसे नियम R1 द्वारा किसी
   प्रोजेक्ट में कॉपी किया जाता है।
+- `.claude-plugin/` — Claude Code प्लगइन + मार्केटप्लेस मैनिफ़ेस्ट।
+- `AGENTS.md`, `.github/copilot-instructions.md` — Codex और Copilot के लिए पतले
+  हमेशा-सक्रिय पॉइंटर।
+- `DESIGN.md` — डिज़ाइन का तर्क और निर्णय।
