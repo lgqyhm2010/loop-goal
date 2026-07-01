@@ -1,7 +1,7 @@
 # loop-goal skill — Design Spec
 
 **Date:** 2026-05-17
-**Status:** Approved design, pre-implementation
+**Status:** Implemented — shipped as a standalone skill repo
 **Location:** `loop-goal/` (standalone skill repo; extracted from `ai-config/skills/loop-goal/`)
 
 ---
@@ -37,8 +37,8 @@ superpowers plugin installed.
 - `superpowers:subagent-driven-development` is listed in README only as
   an **optional companion**, never a dependency. Rule R2 fully
   describes subagent delegation on its own.
-- Output paths use the neutral `docs/loop-goal/`, never
-  `docs/superpowers/`.
+- The checkpoint path is the neutral `.loopgoal/state.json`, never a
+  superpowers-specific path.
 
 ## Mode detection (skill entry, step 1)
 
@@ -51,7 +51,7 @@ superpowers plugin installed.
 
 Automatic (via the `description` field) plus explicit invocation.
 Trigger phrases: "持续做", "每隔", "循环跑", "直到…为止", "自主跑",
-"loop", "goal", and explicit "用 loop-goal skill".
+"跑个 loop", "loop", "goal", and explicit "用 loop-goal skill".
 
 ## Checkpoint file: `.loopgoal/state.json`
 
