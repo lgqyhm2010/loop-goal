@@ -6,6 +6,29 @@ A discipline skill for running **long tasks** reliably — tasks that
 either repeat on a schedule (**loops**) or run until a goal is met
 (**goals**).
 
+## Install
+
+Add it with the [`skills`](https://github.com/vercel-labs/skills) CLI —
+no clone, no manual copy:
+
+```bash
+# Into the current project → .claude/skills/
+npx skills add lgqyhm2010/loop-goal
+
+# For every project → ~/.claude/skills/
+npx skills add lgqyhm2010/loop-goal -g
+```
+
+`skills` finds the `SKILL.md` at the repo root and drops it (plus
+`templates/`) into your skills directory. Add `-a claude-code -y` to
+install non-interactively.
+
+Prefer to do it by hand? Copy `SKILL.md` and `templates/` into
+`.claude/skills/loop-goal/`.
+
+Once installed, just describe a looping or run-until-done task — the
+skill triggers on its own (see [When it triggers](#when-it-triggers)).
+
 ## The problem
 
 Long-running agent tasks fail in three quiet ways:

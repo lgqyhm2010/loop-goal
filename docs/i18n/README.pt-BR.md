@@ -6,6 +6,29 @@ Uma skill de disciplina para executar **tarefas longas** de forma
 confiável — tarefas que ou se repetem em uma programação (**loops**) ou
 rodam até uma meta ser atingida (**goals**).
 
+## Instalação
+
+Adicione com a CLI [`skills`](https://github.com/vercel-labs/skills) —
+sem clone, sem cópia manual:
+
+```bash
+# No projeto atual → .claude/skills/
+npx skills add lgqyhm2010/loop-goal
+
+# Para todos os projetos → ~/.claude/skills/
+npx skills add lgqyhm2010/loop-goal -g
+```
+
+O `skills` encontra o `SKILL.md` na raiz do repositório e o coloca (junto
+com `templates/`) no seu diretório de skills. Adicione `-a claude-code -y`
+para instalar de forma não interativa.
+
+Prefere fazer à mão? Copie `SKILL.md` e `templates/` para
+`.claude/skills/loop-goal/`.
+
+Uma vez instalada, basta descrever uma tarefa em loop ou de rodar-até-concluir
+— a skill é acionada por conta própria (veja [Quando ela é acionada](#quando-ela-é-acionada)).
+
 ## O problema
 
 Tarefas de agente de longa duração falham de três formas silenciosas:

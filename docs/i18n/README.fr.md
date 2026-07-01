@@ -6,6 +6,30 @@ Une compétence de discipline pour exécuter de manière fiable des **tâches lo
 soit se répètent selon une planification (**boucles**), soit s'exécutent jusqu'à ce qu'un objectif soit atteint
 (**objectifs**).
 
+## Installation
+
+Ajoutez-la avec la CLI [`skills`](https://github.com/vercel-labs/skills) —
+sans clonage, sans copie manuelle :
+
+```bash
+# Dans le projet courant → .claude/skills/
+npx skills add lgqyhm2010/loop-goal
+
+# Pour chaque projet → ~/.claude/skills/
+npx skills add lgqyhm2010/loop-goal -g
+```
+
+`skills` trouve le `SKILL.md` à la racine du dépôt et le dépose (avec
+`templates/`) dans votre répertoire de compétences. Ajoutez `-a claude-code -y`
+pour une installation non interactive.
+
+Vous préférez le faire à la main ? Copiez `SKILL.md` et `templates/` dans
+`.claude/skills/loop-goal/`.
+
+Une fois installée, décrivez simplement une tâche en boucle ou à exécuter
+jusqu'à l'achèvement — la compétence se déclenche d'elle-même (voir
+[Quand elle se déclenche](#quand-elle-se-déclenche)).
+
 ## Le problème
 
 Les tâches d'agent de longue durée échouent de trois manières discrètes :
