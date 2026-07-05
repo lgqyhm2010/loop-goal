@@ -52,9 +52,9 @@ commits hold history. Copy the skeleton from `templates/state.json`.
 compaction is most likely to silently drop. Record tradeoffs there as
 you make them.
 
-## The six rules
+## The seven rules
 
-Follow all six. They are rigid — do not adapt them away.
+Follow all seven. They are rigid — do not adapt them away.
 
 - **R1 — Init.** Before starting, create `.loopgoal/state.json` from the
   template and write `exit_condition` explicitly. If you cannot state
@@ -93,6 +93,23 @@ Follow all six. They are rigid — do not adapt them away.
   you cannot resolve: set `status` to `blocked`, record it in
   `current.blockers`, and stop to ask the user. Never spin silently.
 
+- **R7 — Scale-out.** When a unit of work fans out into **≥4 independent
+  work units that can run in parallel** — no ordering dependency between
+  them (bulk file migration, multi-target audit, fan-out discover/verify)
+  — do NOT run them as sequential R2 subagents. Instead the coordinator
+  (main session) MUST call the `Workflow` tool to fan them out in one
+  orchestrated pass. Constraints:
+  - Threshold is **≥4 independent units**. Fewer than 4, or any ordering
+    dependency between them → stay on R2 (single fresh subagent, serial).
+  - R7 replaces R2 **only inside that one phase**. Phases stay serial:
+    when the Workflow returns, the coordinator immediately follows R3
+    order — write `.loopgoal/state.json` → `git commit` — before the next
+    phase.
+  - The main session stays a thin coordinator: it launches the Workflow
+    and records the result; it does not do the per-unit work itself.
+  - Mostly a **GOAL** concern — phases are divisible. LOOP iterations are
+    time-driven and serial, so R7 rarely applies there.
+
 ## LOOP-specific
 
 - A safe point is **each iteration**. Iterations must be idempotent:
@@ -113,6 +130,8 @@ Follow all six. They are rigid — do not adapt them away.
   state, so there must be a command that checks it.
 - Break the goal into `phases[]` up front. Each phase is one R2 unit of
   work.
+- If a phase splits into ≥4 independent, parallelizable units, apply
+  **R7** (Workflow fan-out) instead of a serial R2 subagent.
 
 ## Optional companions
 

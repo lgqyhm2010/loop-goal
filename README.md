@@ -76,9 +76,11 @@ When invoked, the skill:
    (result-driven, run-until-done).
 2. **Mandates a checkpoint file** — `.loopgoal/state.json` holds the
    single recoverable state; git commits hold history.
-3. **Enforces six rules** — init with an explicit exit condition, run
+3. **Enforces seven rules** — init with an explicit exit condition, run
    each iteration in a fresh subagent (context isolation), checkpoint
-   in a fixed order, verify on resume, log decisions, exit cleanly.
+   in a fixed order, verify on resume, log decisions, exit cleanly, and
+   scale a phase out to the `Workflow` tool when it fans into ≥4
+   independent, parallel units.
 
 It is **pure discipline**: it writes no code, runs no commands, and
 does not wrap `/loop` or `/schedule` — it constrains *how* you run them.
@@ -98,7 +100,7 @@ plugin is an optional companion, never a requirement.
 ## Files
 
 - `skills/loop-goal/SKILL.md` — the skill itself: mode detection, the checkpoint
-  format, the six rules.
+  format, the seven rules.
 - `skills/loop-goal/templates/state.json` — the checkpoint skeleton, copied into
   a project by rule R1.
 - `.claude-plugin/` — Claude Code plugin + marketplace manifests.

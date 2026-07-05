@@ -9,7 +9,7 @@ discipline before you start.
 "run autonomously" — or the Chinese equivalents "持续做", "每隔", "循环跑",
 "直到…为止", "自主跑", "跑个 loop".
 
-**The six rules (summary):**
+**The seven rules (summary):**
 
 - **R1 — Init.** Create `.loopgoal/state.json` with an explicit `exit_condition`.
 - **R2 — Context isolation.** Run each iteration/phase in a fresh subagent.
@@ -17,6 +17,7 @@ discipline before you start.
 - **R4 — Resume.** Read the state file and run `verify_cmd` before each step.
 - **R5 — Decision log.** Append every tradeoff to `decisions[]`.
 - **R6 — Exit.** Stop cleanly when `exit_condition` is met; never spin silently.
+- **R7 — Scale-out.** Fan a phase out via the `Workflow` tool when it splits into ≥4 independent, parallel units; otherwise stay on R2.
 
 Full rules, checkpoint format, and loop/goal specifics:
 **[`skills/loop-goal/SKILL.md`](skills/loop-goal/SKILL.md)**.
