@@ -67,7 +67,7 @@ npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 
 1. **检测模式**——LOOP（时间驱动、重复执行）还是 GOAL（结果驱动、跑到完成为止）。
 2. **强制要求一个检查点文件**——`.loopgoal/state.json` 保存唯一可恢复的状态；git 提交保存历史记录。
-3. **强制执行六条规则**——用明确的退出条件初始化、在全新的子智能体中运行每一次迭代（上下文隔离）、按固定顺序写检查点、恢复时进行校验、记录决策、干净地退出。
+3. **强制执行七条规则**——用明确的退出条件初始化、在全新的子智能体中运行每一次迭代（上下文隔离）、按固定顺序写检查点、恢复时进行校验、记录决策、干净地退出，并在某个阶段扇出为 ≥4 个相互独立、可并行的单元时，把该阶段横向扩展到 `Workflow` 工具。
 
 它是**纯纪律**：不写任何代码、不运行任何命令，也不封装 `/loop` 或 `/schedule`——它约束的是你*如何*运行它们。
 
@@ -81,7 +81,7 @@ npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 
 ## 文件
 
-- `skills/loop-goal/SKILL.md`——技能本身：模式检测、检查点格式、六条规则。
+- `skills/loop-goal/SKILL.md`——技能本身：模式检测、检查点格式、七条规则。
 - `skills/loop-goal/templates/state.json`——检查点骨架，由规则 R1 复制
   到项目中。
 - `.claude-plugin/`——Claude Code 插件与市场（marketplace）清单文件。

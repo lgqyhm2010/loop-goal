@@ -76,9 +76,11 @@ Al invocarse, la skill:
    (impulsado por el resultado, se ejecuta hasta terminar).
 2. **Exige un archivo de checkpoint** — `.loopgoal/state.json` contiene el
    único estado recuperable; los commits de git contienen el historial.
-3. **Impone seis reglas** — inicializar con una condición de salida explícita, ejecutar
+3. **Impone siete reglas** — inicializar con una condición de salida explícita, ejecutar
    cada iteración en un subagente nuevo (aislamiento de contexto), hacer checkpoint
-   en un orden fijo, verificar al reanudar, registrar decisiones, salir limpiamente.
+   en un orden fijo, verificar al reanudar, registrar decisiones, salir limpiamente y
+   escalar una fase hacia la herramienta `Workflow` cuando se ramifica en ≥4 unidades
+   independientes y paralelas.
 
 Es **pura disciplina**: no escribe código, no ejecuta comandos y
 no envuelve `/loop` ni `/schedule` — restringe *cómo* los ejecutas.
@@ -98,7 +100,7 @@ es un compañero opcional, nunca un requisito.
 ## Archivos
 
 - `skills/loop-goal/SKILL.md` — la skill en sí: detección de modo, el formato de
-  checkpoint, las seis reglas.
+  checkpoint, las siete reglas.
 - `skills/loop-goal/templates/state.json` — el esqueleto del checkpoint, copiado a
   un proyecto por la regla R1.
 - `.claude-plugin/` — manifiestos del plugin y del marketplace de Claude Code.

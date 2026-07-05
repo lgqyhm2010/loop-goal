@@ -80,10 +80,12 @@ Quando invocada, a skill:
    (orientado ao resultado, roda-até-concluir).
 2. **Exige um arquivo de checkpoint** — `.loopgoal/state.json` guarda o
    único estado recuperável; os commits do git guardam o histórico.
-3. **Impõe seis regras** — inicializar com uma condição de saída
+3. **Impõe sete regras** — inicializar com uma condição de saída
    explícita, executar cada iteração em um subagente novo (isolamento de
    contexto), fazer checkpoint em uma ordem fixa, verificar ao retomar,
-   registrar decisões, sair de forma limpa.
+   registrar decisões, sair de forma limpa e escalar uma fase para a
+   ferramenta `Workflow` quando ela se ramifica em ≥4 unidades
+   independentes e paralelas.
 
 Ela é **pura disciplina**: não escreve código, não roda comandos e não
 envolve `/loop` ou `/schedule` — ela restringe *como* você os executa.
@@ -103,7 +105,7 @@ plugin superpowers é um complemento opcional, nunca um requisito.
 ## Arquivos
 
 - `skills/loop-goal/SKILL.md` — a própria skill: detecção de modo, o formato
-  do checkpoint, as seis regras.
+  do checkpoint, as sete regras.
 - `skills/loop-goal/templates/state.json` — o esqueleto do checkpoint,
   copiado para um projeto pela regra R1.
 - `.claude-plugin/` — manifestos do plugin do Claude Code + do marketplace.

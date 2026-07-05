@@ -64,7 +64,7 @@ npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 
 1. **偵測模式**——LOOP（時間驅動、重複執行）對比 GOAL（結果驅動、執行到完成為止）。
 2. **強制要求一個檢查點檔案**——`.loopgoal/state.json` 保存唯一可復原的狀態；git commits 保存歷史。
-3. **強制執行六條規則**——以明確的出口條件初始化、在全新的 subagent 中執行每次迭代（脈絡隔離）、以固定順序寫入檢查點、復原時驗證、記錄決策、乾淨地退出。
+3. **強制執行七條規則**——以明確的出口條件初始化、在全新的 subagent 中執行每次迭代（脈絡隔離）、以固定順序寫入檢查點、復原時驗證、記錄決策、乾淨地退出，並在某個階段擴散成 ≥ 4 個彼此獨立、可平行執行的單元時，將該階段擴展交由 `Workflow` 工具處理。
 
 它是**純粹的紀律**：它不寫任何程式碼、不執行任何命令，也不包裝 `/loop` 或 `/schedule`——它約束的是你*如何*執行它們。
 
@@ -78,7 +78,7 @@ npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 
 ## 檔案
 
-- `skills/loop-goal/SKILL.md`——技能本身：模式偵測、檢查點格式、六條規則。
+- `skills/loop-goal/SKILL.md`——技能本身：模式偵測、檢查點格式、七條規則。
 - `skills/loop-goal/templates/state.json`——檢查點骨架，由規則 R1 複製進專案。
 - `.claude-plugin/`——Claude Code 外掛與 marketplace 的清單檔。
 - `AGENTS.md`、`.github/copilot-instructions.md`——供 Codex 與 Copilot 使用的精簡常駐指標檔。
