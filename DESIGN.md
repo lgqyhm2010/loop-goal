@@ -19,7 +19,7 @@ the agent runs the task.
 
 ## Scope
 
-- **In scope:** mode detection, a standard checkpoint file format, six
+- **In scope:** mode detection, a standard checkpoint file format, seven
   enforced rules, loop/goal-specific guidance.
 - **Out of scope:** the skill does NOT wrap or replace `/loop`,
   `ScheduleWakeup`, `CronCreate`, or `subagent-driven-development`. It
@@ -110,6 +110,13 @@ compaction is most likely to silently drop.
 - **R6 — Exit.** When the written exit condition is met: set `status`,
   stop scheduling. If `BLOCKED` and unrecoverable: stop and ask the
   user.
+- **R7 — Scale-out.** When a phase fans out into ≥4 independent,
+  parallelizable units (no ordering dependency between them), the
+  coordinator fans them out via the `Workflow` tool in one pass instead
+  of serial R2 subagents — only inside that one phase; phases stay
+  serial, and R3's checkpoint order resumes when the Workflow returns.
+  Mostly a GOAL concern; LOOP iterations are serial, so it rarely
+  applies there.
 
 ### LOOP-specific
 
@@ -130,7 +137,7 @@ compaction is most likely to silently drop.
 loop-goal/
 ├── skills/
 │   └── loop-goal/
-│       ├── SKILL.md          # mode detection + R1–R6 + triggers
+│       ├── SKILL.md          # mode detection + R1–R7 + triggers
 │       └── templates/
 │           └── state.json    # checkpoint skeleton, copied by R1
 ├── .claude-plugin/

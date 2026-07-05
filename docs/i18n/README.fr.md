@@ -78,9 +78,11 @@ Lorsqu'elle est invoquée, la compétence :
    (piloté par le résultat, exécuté jusqu'à l'achèvement).
 2. **Impose un fichier de point de contrôle** — `.loopgoal/state.json` détient
    l'unique état récupérable ; les commits git détiennent l'historique.
-3. **Applique six règles** — initialiser avec une condition de sortie explicite, exécuter
+3. **Applique sept règles** — initialiser avec une condition de sortie explicite, exécuter
    chaque itération dans un sous-agent frais (isolation du contexte), créer un point de contrôle
-   dans un ordre fixe, vérifier à la reprise, journaliser les décisions, sortir proprement.
+   dans un ordre fixe, vérifier à la reprise, journaliser les décisions, sortir proprement,
+   et déployer une phase vers l'outil `Workflow` lorsqu'elle se ramifie en ≥ 4 unités
+   indépendantes et parallèles.
 
 C'est de la **pure discipline** : elle n'écrit aucun code, n'exécute aucune commande et
 n'enveloppe pas `/loop` ni `/schedule` — elle contraint *la manière dont* vous les exécutez.
@@ -100,7 +102,7 @@ est un compagnon optionnel, jamais une exigence.
 ## Fichiers
 
 - `skills/loop-goal/SKILL.md` — la compétence elle-même : détection du mode, le format du
-  point de contrôle, les six règles.
+  point de contrôle, les sept règles.
 - `skills/loop-goal/templates/state.json` — le squelette du point de contrôle, copié dans
   un projet par la règle R1.
 - `.claude-plugin/` — manifestes du plugin Claude Code et du marketplace.
