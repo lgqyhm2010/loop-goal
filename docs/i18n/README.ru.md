@@ -112,3 +112,6 @@ superpowers — необязательный компаньон, но никог
 - `AGENTS.md`, `.github/copilot-instructions.md` — минимальные всегда активные
   указатели для Codex и Copilot.
 - `DESIGN.md` — обоснование дизайна и принятые решения.
+
+
+Host capability contract: [canonical skill](../../skills/loop-goal/SKILL.md#host-capabilities-and-permission-boundaries). Tool-specific examples require available host tools and authorization; use documented fallbacks for no subagent, no Git, read-only, or no shell.

@@ -110,3 +110,6 @@ plugin superpowers é um complemento opcional, nunca um requisito.
 - `AGENTS.md`, `.github/copilot-instructions.md` — ponteiros enxutos e
   sempre ativos para o Codex e o Copilot.
 - `DESIGN.md` — a justificativa e as decisões de design.
+
+
+Host capability contract: [canonical skill](../../skills/loop-goal/SKILL.md#host-capabilities-and-permission-boundaries). Tool-specific examples require available host tools and authorization; use documented fallbacks for no subagent, no Git, read-only, or no shell.

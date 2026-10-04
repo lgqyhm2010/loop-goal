@@ -1,11 +1,14 @@
 {
-  "mode": "loop|goal",
-  "objective": "",
-  "exit_condition": "",
+  "mode": "goal",
+  "objective": "Replace with the task objective",
+  "exit_condition": "Replace with an explicit completion or stopping condition",
   "status": "in_progress",
   "iteration": 0,
   "phases": [
-    {"name": "", "status": "todo"}
+    {
+      "name": "",
+      "status": "todo"
+    }
   ],
   "current": {
     "focus": "",
@@ -14,5 +17,6 @@
   },
   "decisions": [],
   "verify_cmd": "",
-  "updated_at": ""
+  "updated_at": "",
+  "verify_observation": "Replace with a repeatable read-only completion check"
 }

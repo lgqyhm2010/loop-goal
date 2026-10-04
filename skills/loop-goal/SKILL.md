@@ -52,9 +52,19 @@ commits hold history. Copy the skeleton from `templates/state.json`.
 compaction is most likely to silently drop. Record tradeoffs there as
 you make them.
 
+## Host capabilities and permission boundaries
+
+Before a phase, inspect the host's available capabilities and record them in the checkpoint.
+Use the host-native subagent tool (for example `Agent` or `spawn_agent`), never assume one name exists.
+If subagents are unavailable, use short serial phases and persist a checkpoint between them; record this degraded mode.
+If the workspace is not a Git repository, is read-only, or commits are not authorized, skip commits and retain the checkpoint in an authorized writable location. If no such location exists, stop and request a supported checkpoint destination.
+For Git checkpoints, stage and commit only task-owned paths. Never run a blanket `git add .` or include pre-existing staged changes; isolate the checkpoint commit or stop if the index cannot be safely separated.
+If shell commands are unavailable or the task is read-only, use a named, repeatable read-only observation in `verify_observation` instead of `verify_cmd`. Stop when neither verification route is available. Missing capabilities never justify expanded permissions, external actions, or fabricated success.
+The invariants are explicit exit criteria, recoverable state, verified progress, and bounded context; the capability adaptations above take precedence over tool-specific examples below.
+
 ## The six rules
 
-Follow all six. They are rigid — do not adapt them away.
+Follow all six invariants, using the capability adaptations above.
 
 - **R1 — Init.** Before starting, create `.loopgoal/state.json` from the
   template and write `exit_condition` explicitly. If you cannot state
@@ -62,7 +72,7 @@ Follow all six. They are rigid — do not adapt them away.
   ends.
 
 - **R2 — Context isolation.** Run each unit of work — a LOOP iteration
-  or a GOAL phase — in a **fresh subagent** via the `Agent` tool. The
+  or a GOAL phase — in a **fresh subagent** using the host-native tool when available. The
   subagent reads the checkpoint, advances **one step**, writes the
   checkpoint, and returns a one-line summary. This is equivalent to
   clearing context every iteration: the main session stays a thin
@@ -74,13 +84,13 @@ Follow all six. They are rigid — do not adapt them away.
 
 - **R3 — Checkpoint order.** At every safe point, in this exact order:
   1. write `.loopgoal/state.json`
-  2. `git commit`
+  2. commit only task-owned paths when authorized and Git is available; otherwise record why the checkpoint is uncommitted
   3. then continue, or schedule the next iteration
   Never reorder. The file must be current before the commit, and both
   before you move on — so a context loss right after still recovers.
 
 - **R4 — Resume.** At the start of every iteration/step: read
-  `.loopgoal/state.json`, run `verify_cmd`, and reconcile it against
+  `.loopgoal/state.json`, run `verify_cmd` or perform `verify_observation`, and reconcile it against
   reality. The file is "what I last believed", not fact. If they
   disagree, reality wins — fix the file first, then proceed.
 
@@ -109,8 +119,7 @@ Follow all six. They are rigid — do not adapt them away.
 - A goal has **no natural boundary**. You MUST carve safe points
   manually: after each completed sub-goal, and before any irreversible
   operation (bulk writes, long jobs, commits to shared branches).
-- `verify_cmd` is **mandatory** — a goal is defined by a checkable end
-  state, so there must be a command that checks it.
+- A nonempty `verify_cmd` or `verify_observation` is **mandatory** — a goal must have a repeatable check.
 - Break the goal into `phases[]` up front. Each phase is one R2 unit of
   work.
 

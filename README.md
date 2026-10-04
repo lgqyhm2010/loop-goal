@@ -91,9 +91,7 @@ Phrases like "loop", "goal", "keep running", "run in a loop", "until X",
 
 ## Self-contained
 
-Works in any project. It depends only on built-in tools (`Agent`, git)
-and harness mechanisms (`/loop`, `ScheduleWakeup`). The superpowers
-plugin is an optional companion, never a requirement.
+Works across hosts with the capability adaptations in the [skill](skills/loop-goal/SKILL.md). Subagents and Git are used when available and authorized; read-only observations can replace shell verification. It does not require a specific tool name or scheduler. The superpowers plugin is an optional companion, never a requirement.
 
 ## Files
 

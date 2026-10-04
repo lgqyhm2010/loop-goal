@@ -86,3 +86,6 @@ npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 - `AGENTS.md`、`.github/copilot-instructions.md` — Codex と Copilot 向けの、常時有効化を
   行う簡潔なポインターファイル。
 - `DESIGN.md` — 設計の根拠と決定事項。
+
+
+Host capability contract: [canonical skill](../../skills/loop-goal/SKILL.md#host-capabilities-and-permission-boundaries). Tool-specific examples require available host tools and authorization; use documented fallbacks for no subagent, no Git, read-only, or no shell.

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Loop goal checkpoint",
+  "type": "object",
+  "required": ["mode", "objective", "exit_condition", "status", "iteration", "phases", "current", "decisions", "updated_at"],
+  "properties": {
+    "mode": {"enum": ["loop", "goal"]},
+    "objective": {"type": "string", "minLength": 1},
+    "exit_condition": {"type": "string", "minLength": 1},
+    "status": {"enum": ["in_progress", "done", "blocked"]},
+    "iteration": {"type": "integer", "minimum": 0},
+    "phases": {"type": "array", "items": {"type": "object", "required": ["name", "status"], "properties": {"name": {"type": "string"}, "status": {"enum": ["todo", "in_progress", "done", "blocked"]}}}},
+    "current": {"type": "object", "required": ["focus", "next_action", "blockers"], "properties": {"focus": {"type": "string"}, "next_action": {"type": "string"}, "blockers": {"type": "string"}}},
+    "decisions": {"type": "array"},
+    "verify_cmd": {"type": "string"},
+    "verify_observation": {"type": "string"},
+    "updated_at": {"type": "string"}
+  },
+  "anyOf": [
+    {"required": ["verify_cmd"], "properties": {"verify_cmd": {"minLength": 1}}},
+    {"required": ["verify_observation"], "properties": {"verify_observation": {"minLength": 1}}}
+  ]
+}
