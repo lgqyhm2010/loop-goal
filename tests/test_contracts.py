@@ -30,6 +30,17 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             self.validator.validate(invalid)
 
+    def test_always_on_entrypoints_preserve_capability_fallbacks(self):
+        for relative in ['AGENTS.md', '.github/copilot-instructions.md']:
+            with self.subTest(entrypoint=relative):
+                text = (ROOT / relative).read_text()
+                self.assertIn('host-native subagent when available', text)
+                self.assertIn('otherwise checkpoint short serial phases', text)
+                self.assertIn('commit only task-owned paths when Git/permissions allow', text)
+                self.assertIn('`verify_cmd` or `verify_observation`', text)
+                self.assertIn('permission boundaries in the full skill take precedence', text)
+                self.assertIn('never broaden permissions or include unrelated staged changes', text)
+
     def test_plugin_paths_and_localized_readmes_exist(self):
         plugin = json.loads((ROOT / '.claude-plugin/plugin.json').read_text())
         market = json.loads((ROOT / '.claude-plugin/marketplace.json').read_text())
