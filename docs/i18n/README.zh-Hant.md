@@ -83,3 +83,6 @@ npx skills add lgqyhm2010/loop-goal -a claude-code -a codex -a github-copilot -y
 - `.claude-plugin/`——Claude Code 外掛與 marketplace 的清單檔。
 - `AGENTS.md`、`.github/copilot-instructions.md`——供 Codex 與 Copilot 使用的精簡常駐指標檔。
 - `DESIGN.md`——設計理據與決策。
+
+
+Host capability contract: [canonical skill](../../skills/loop-goal/SKILL.md#host-capabilities-and-permission-boundaries). Tool-specific examples require available host tools and authorization; use documented fallbacks for no subagent, no Git, read-only, or no shell.

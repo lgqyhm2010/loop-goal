@@ -105,3 +105,6 @@ es un compañero opcional, nunca un requisito.
 - `AGENTS.md`, `.github/copilot-instructions.md` — punteros mínimos siempre activos
   para Codex y Copilot.
 - `DESIGN.md` — justificación y decisiones de diseño.
+
+
+Host capability contract: [canonical skill](../../skills/loop-goal/SKILL.md#host-capabilities-and-permission-boundaries). Tool-specific examples require available host tools and authorization; use documented fallbacks for no subagent, no Git, read-only, or no shell.

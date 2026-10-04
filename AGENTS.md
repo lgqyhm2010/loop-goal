@@ -12,9 +12,9 @@ discipline before you start.
 **The six rules (summary):**
 
 - **R1 — Init.** Create `.loopgoal/state.json` with an explicit `exit_condition`.
-- **R2 — Context isolation.** Run each iteration/phase in a fresh subagent.
-- **R3 — Checkpoint order.** Write state → `git commit` → then continue.
-- **R4 — Resume.** Read the state file and run `verify_cmd` before each step.
+- **R2 — Context isolation.** Use a host-native subagent when available; otherwise checkpoint short serial phases.
+- **R3 — Checkpoint order.** Write state → commit only task-owned paths when Git/permissions allow → then continue.
+- **R4 — Resume.** Read state and run `verify_cmd` or `verify_observation` before each step.
 - **R5 — Decision log.** Append every tradeoff to `decisions[]`.
 - **R6 — Exit.** Stop cleanly when `exit_condition` is met; never spin silently.
 
@@ -24,3 +24,5 @@ Full rules, checkpoint format, and loop/goal specifics:
 *Copying this file into your own repo? Repoint the link above to wherever you
 installed the skill (e.g. `.agents/skills/loop-goal/SKILL.md`), or drop it if you
 rely on the skill's own auto-trigger.*
+
+The host-capability and permission boundaries in the full skill take precedence over tool-specific examples. Missing Git, shell, or subagents must be recorded; never broaden permissions or include unrelated staged changes.
